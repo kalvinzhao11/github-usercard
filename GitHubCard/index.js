@@ -7,7 +7,7 @@ import axios from 'axios'
 axios.get('https://api.github.com/users/kalvinzhao11')
   .then(response =>{
     console.log(response)
-    debugger
+    // debugger
   })
   .catch(error =>{
     debugger
@@ -36,7 +36,18 @@ axios.get('https://api.github.com/users/kalvinzhao11')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ["sekotszs", "jdulay91", "DeeDowns", "HarryHenryGebel", "avawing"];
+followersArray.forEach(name =>{
+  axios.get(`https://api.github.com/users/${name}`)
+    .then(response =>{
+      console.log(response.data)
+      const gitProfile = githubMarkUp(response.data)
+      cards.appendChild(gitProfile)
+    })
+    .catch(error => {
+      debugger
+    })
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -86,22 +97,33 @@ const githubMarkUp = (obj) => {
   userName.classList.add('username')
 
   profilePic.setAttribute('src', obj.avatar_url)
-  userInfo.textContent = obj.login
   fullName.textContent = obj.name
+  userName.textContent = obj.login
   location.textContent = `Location: ${obj.location}`
   profileURL.setAttribute('href', obj.html_url)
   profileURL.textContent = obj.html_url
   followers.textContent = `Followers: ${obj.followers}`
   following.textContent = `Followings: ${obj.following}`
   bio.textContent = `Bio: ${obj.bio}`
-
-  debugger
+  console.log(card)
+  // debugger
 
   return card
 
 }
+// githubMarkUp('hi')
 const instructorsGit = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"]
-
+instructorsGit.forEach(name =>{
+  axios.get(`https://api.github.com/users/${name}`)
+    .then(response =>{
+      console.log(response.data)
+      const gitProfile = githubMarkUp(response.data)
+      cards.appendChild(gitProfile)
+    })
+    .catch(error => {
+      debugger
+    })
+})
 /*
   List of LS Instructors Github username's:
     tetondan
