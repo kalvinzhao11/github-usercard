@@ -1,9 +1,17 @@
+import axios from 'axios'
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+axios.get('https://api.github.com/users/kalvinzhao11')
+  .then(response =>{
+    console.log(response)
+    debugger
+  })
+  .catch(error =>{
+    debugger
+  })
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -49,6 +57,50 @@ const followersArray = [];
       </div>
     </div>
 */
+const cards = document.querySelector('.cards')
+const githubMarkUp = (obj) => {
+  const card = document.createElement('div')
+  const profilePic = document.createElement('img')
+  const userInfo = document.createElement('div')
+  const fullName = document.createElement('h1')
+  const userName = document.createElement('h3')
+  const location = document.createElement('p')
+  const profileURL = document.createElement('p')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  card.appendChild(profilePic)
+  card.appendChild(userInfo)
+  userInfo.appendChild(fullName)
+  userInfo.appendChild(userName)
+  userInfo.appendChild(location)
+  userInfo.appendChild(profileURL)
+  userInfo.appendChild(followers)
+  userInfo.appendChild(following)
+  userInfo.appendChild(bio)
+
+  card.classList.add('card')
+  userInfo.classList.add('card-info')
+  fullName.classList.add('name')
+  userName.classList.add('username')
+
+  profilePic.setAttribute('src', obj.avatar_url)
+  userInfo.textContent = obj.login
+  fullName.textContent = obj.name
+  location.textContent = `Location: ${obj.location}`
+  profileURL.setAttribute('href', obj.html_url)
+  profileURL.textContent = obj.html_url
+  followers.textContent = `Followers: ${obj.followers}`
+  following.textContent = `Followings: ${obj.following}`
+  bio.textContent = `Bio: ${obj.bio}`
+
+  debugger
+
+  return card
+
+}
+const instructorsGit = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"]
 
 /*
   List of LS Instructors Github username's:
