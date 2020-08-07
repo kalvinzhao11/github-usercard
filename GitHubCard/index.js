@@ -7,6 +7,8 @@ import axios from 'axios'
 axios.get('https://api.github.com/users/kalvinzhao11')
   .then(response =>{
     console.log(response)
+    const gitProfile = githubMarkUp(response.data)
+    cards.appendChild(gitProfile)
     // debugger
   })
   .catch(error =>{
@@ -40,7 +42,6 @@ const followersArray = ["sekotszs", "jdulay91", "DeeDowns", "HarryHenryGebel", "
 followersArray.forEach(name =>{
   axios.get(`https://api.github.com/users/${name}`)
     .then(response =>{
-      console.log(response.data)
       const gitProfile = githubMarkUp(response.data)
       cards.appendChild(gitProfile)
     })
@@ -76,7 +77,8 @@ const githubMarkUp = (obj) => {
   const fullName = document.createElement('h1')
   const userName = document.createElement('h3')
   const location = document.createElement('p')
-  const profileURL = document.createElement('p')
+  const profile = document.createElement('p')
+  const profileURL = document.createElement('a')
   const followers = document.createElement('p')
   const following = document.createElement('p')
   const bio = document.createElement('p')
@@ -86,7 +88,9 @@ const githubMarkUp = (obj) => {
   userInfo.appendChild(fullName)
   userInfo.appendChild(userName)
   userInfo.appendChild(location)
-  userInfo.appendChild(profileURL)
+  userInfo.appendChild(profile)
+  profile.textContent = `Profile: `
+  profile.appendChild(profileURL)
   userInfo.appendChild(followers)
   userInfo.appendChild(following)
   userInfo.appendChild(bio)
@@ -106,7 +110,7 @@ const githubMarkUp = (obj) => {
   following.textContent = `Followings: ${obj.following}`
   bio.textContent = `Bio: ${obj.bio}`
   console.log(card)
-  // debugger
+  debugger
 
   return card
 
@@ -116,7 +120,6 @@ const instructorsGit = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigkne
 instructorsGit.forEach(name =>{
   axios.get(`https://api.github.com/users/${name}`)
     .then(response =>{
-      console.log(response.data)
       const gitProfile = githubMarkUp(response.data)
       cards.appendChild(gitProfile)
     })
