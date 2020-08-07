@@ -110,12 +110,10 @@ const githubMarkUp = (obj) => {
   following.textContent = `Followings: ${obj.following}`
   bio.textContent = `Bio: ${obj.bio}`
   console.log(card)
-  debugger
 
   return card
 
 }
-// githubMarkUp('hi')
 const instructorsGit = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"]
 instructorsGit.forEach(name =>{
   axios.get(`https://api.github.com/users/${name}`)
